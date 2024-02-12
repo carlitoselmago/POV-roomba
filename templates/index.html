@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>WebRTC Stream</title>
+</head>
+<body>
+    <video id="videoElement" autoplay style="border:solid 1px black;width:100%;height:100%"></video>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+<script>
+    var socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port);
+    var peerConnection;
+    const config = {
+        "iceServers": [{ "urls": "stun:stun.l.google.com:19302" }]
+    };
+
+    socket.on('connect', () => {
+        // When connected, create offer
+        createPeerConnection();
+        navigator.mediaDevices.getUserMedia({ video: true, audio: true })
+            .then(stream => {
+                document.getElementById('videoElement').srcObject = stream;
+                stream.getTracks().forEach(track => peerConnection.addTrack(track, stream));
+            }).catch(error => console.error('MediaStream error', error));
+    });
+
+    function createPeerConnection() {
+        peerConnection = new RTCPeerConnection(config);
+
+        // Send any ice candidates to the other peer
+        peerConnection.onicecandidate = ({candidate}) => {
+            socket.emit('message', { 'ice': candidate });
+        };
+
+        peerConnection.ontrack = (event) => {
+            // Set remote video stream
+            var [remoteStream] = event.streams;
+            document.getElementById('videoElement').srcObject = remoteStream;
+        };
+
+        peerConnection.onnegotiationneeded = () => {
+            peerConnection.createOffer().then(offer => {
+                return peerConnection.setLocalDescription(offer);
+            }).then(() => {
+                // Send the offer to the other peer
+                socket.emit('message', {'sdp': peerConnection.localDescription});
+            }).catch(logError);
+        };
+    }
+
+    // Listen for messages from the server
+    socket.on('message', message => {
+        if (message.sdp) {
+            peerConnection.setRemoteDescription(new RTCSessionDescription(message.sdp)).then(() => {
+                // If received an offer, we need to answer
+                if (peerConnection.remoteDescription.type === 'offer') {
+                    peerConnection.createAnswer().then(answer => {
+                        return peerConnection.setLocalDescription(answer);
+                    }).then(() => {
+                        socket.emit('message', {'sdp': peerConnection.localDescription});
+                    }).catch(logError);
+                }
+            }).catch(logError);
+        } else if (message.ice) {
+            peerConnection.addIceCandidate(new RTCIceCandidate(message.ice)).catch(logError);
+        }
+    });
+
+    function logError(error) {
+        console.error(error.name + ': ' + error.message);
+    }
+</script>
+
+    <script>
+        // JavaScript to establish WebRTC connection and display the stream
+    </script>
+</body>
+</html>

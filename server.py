@@ -1,15 +1,21 @@
+# app.py
 from flask import Flask, render_template
+from flask_socketio import SocketIO,emit
 
 app = Flask(__name__)
-
+app.config['SECRET_KEY'] = 'secret!'
+socketio = SocketIO(app)
 
 @app.route('/')
-def home():
-    return render_template('home.html', name="xxx")
+def index():
+    return render_template('index.html')
 
-# main driver function
+@socketio.on('message')
+def handle_message(message):
+    # Just emit the received message to all connected clients except the sender
+    emit('message', message, broadcast=True, include_self=False)
+
+# WebSocket events for signaling would go here
+
 if __name__ == '__main__':
- 
-    # run() method of Flask class runs the application 
-    # on the local development server.
-    app.run(host='0.0.0.0', port=8080)
+    socketio.run(app, debug=True,host='0.0.0.0', port=8080)
