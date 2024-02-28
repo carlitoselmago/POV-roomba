@@ -62,13 +62,13 @@ addEventListener("DOMContentLoaded", function () {
         /*if (cast_not_allowed) { // chrome supports if run with --enable-usermedia-screen-capturing
             document.getElementById('cast_screen').disabled = true;
         }*/
-        document.getElementById('cast_window').disabled = true;
-        document.getElementById('cast_application').disabled = true;
-        document.getElementById('note2').style.display = "none";
-        document.getElementById('note4').style.display = "none";
+        //document.getElementById('cast_window').disabled = true;
+        //ddocument.getElementById('cast_application').disabled = true;
+        //ddocument.getElementById('note2').style.display = "none";
+        //ddocument.getElementById('note4').style.display = "none";
     } else {
-        document.getElementById('note1').style.display = "none";
-        document.getElementById('note3').style.display = "none";
+        //ddocument.getElementById('note1').style.display = "none";
+        //ddocument.getElementById('note3').style.display = "none";
     }
     addGyronormScript();
 });
