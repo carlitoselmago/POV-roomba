@@ -233,9 +233,9 @@ function start() {
             var request = {
                 what: "call",
                 options: {
-                    force_hw_vcodec: document.getElementById("remote_hw_vcodec").checked,
-                    vformat: document.getElementById("remote_vformat").value,
-                    trickle_ice: trickleice_selection()
+                    force_hw_vcodec: false,//document.getElementById("remote_hw_vcodec").checked,
+                    vformat: 60,//document.getElementById("remote_vformat").value,
+                    trickle_ice: true//trickleice_selection()
                 }
             };
             ws.send(JSON.stringify(request));
