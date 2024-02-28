@@ -8,7 +8,7 @@ socketio = SocketIO(app)
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('uv4l.html')
 
 @socketio.on('message')
 def handle_message(message):
@@ -18,4 +18,4 @@ def handle_message(message):
 # WebSocket events for signaling would go here
 
 if __name__ == '__main__':
-    socketio.run(app, debug=True,host='0.0.0.0', port=8080)
+    socketio.run(app, debug=True,host='0.0.0.0', port=5000)
