@@ -70,7 +70,7 @@ addEventListener("DOMContentLoaded", function () {
         //ddocument.getElementById('note1').style.display = "none";
         //ddocument.getElementById('note3').style.display = "none";
     }
-    addGyronormScript();
+   // addGyronormScript();
 });
 
 var ws = null;
