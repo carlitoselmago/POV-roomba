@@ -112,7 +112,7 @@ function createPeerConnection() {
     try {
         var pcConfig_ = pcConfig;
         try {
-            ice_servers = document.getElementById('ice_servers').value;
+            ice_servers = "";//document.getElementById('ice_servers').value;
             if (ice_servers) {
                 pcConfig_.iceServers = JSON.parse(ice_servers);
             }
