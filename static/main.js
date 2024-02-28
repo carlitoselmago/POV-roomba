@@ -59,9 +59,9 @@ addEventListener("DOMContentLoaded", function () {
     if (cast_not_allowed || !isFirefox) {
         if (document.getElementById('cast_tab'))
             document.getElementById('cast_tab').disabled = true;
-        if (cast_not_allowed) { // chrome supports if run with --enable-usermedia-screen-capturing
+        /*if (cast_not_allowed) { // chrome supports if run with --enable-usermedia-screen-capturing
             document.getElementById('cast_screen').disabled = true;
-        }
+        }*/
         document.getElementById('cast_window').disabled = true;
         document.getElementById('cast_application').disabled = true;
         document.getElementById('note2').style.display = "none";
@@ -246,13 +246,13 @@ function start() {
             console.log("onopen()");
 
             audio_video_stream = null;
-            var cast_mic = document.getElementById("cast_mic").checked;
-            var cast_tab = document.getElementById("cast_tab") ? document.getElementById("cast_tab").checked : false;
-            var cast_camera = document.getElementById("cast_camera").checked;
-            var cast_screen = document.getElementById("cast_screen").checked;
-            var cast_window = document.getElementById("cast_window").checked;
-            var cast_application = document.getElementById("cast_application").checked;
-            var echo_cancellation = document.getElementById("echo_cancellation").checked;
+            var cast_mic = false;//document.getElementById("cast_mic").checked;
+            var cast_tab =  false;//document.getElementById("cast_tab") ? document.getElementById("cast_tab").checked : false;
+            var cast_camera = false;//document.getElementById("cast_camera").checked;
+            var cast_screen =  false;//document.getElementById("cast_screen").checked;
+            var cast_window =  false;//document.getElementById("cast_window").checked;
+            var cast_application =  false;//document.getElementById("cast_application").checked;
+            var echo_cancellation =  false;//document.getElementById("echo_cancellation").checked;
             var localConstraints = {};
             if (cast_mic) {
                 if (echo_cancellation)
