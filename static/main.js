@@ -1,3 +1,6 @@
+var server='10.66.66.2:8080';
+
+
 document.addEventListener('keydown', function(event) {
     const arrowDisplay = document.getElementById('arrowDisplay');
     
@@ -215,8 +218,8 @@ function start() {
         document.getElementById("stop").disabled = false;
         document.getElementById("start").disabled = true;
         document.documentElement.style.cursor = 'wait';
-        var server = document.getElementById("signalling_server").value.toLowerCase();
-
+        //var server = document.getElementById("signalling_server").value.toLowerCase();
+        console.log("server");
         var protocol = location.protocol === "https:" ? "wss:" : "ws:";
         ws = new WebSocket(protocol + '//' + server + '/stream/webrtc');
 
