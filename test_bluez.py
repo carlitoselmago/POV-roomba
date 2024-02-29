@@ -2,12 +2,14 @@ from irobot_edu_sdk.backend.bluetooth import Bluetooth
 from irobot_edu_sdk.backend.serial import Serial
 from irobot_edu_sdk.robots import event, hand_over, Color, Robot, Root, Create3
 from irobot_edu_sdk.music import Note
+from time import sleep
 
 #robot = Root(Bluetooth())
 #robot = Create3(Bluetooth())
-robot = Serial('/dev/ttyACM0')
-#robot=Create3(Bluetooth('MonicaRoomba'))
+#robot = Serial('/dev/ttyACM0')
+robot=Create3(Bluetooth('MonicaRoomba'))
 
+sleep(5)
 
 @event(robot.when_play)
 async def play(robot):
@@ -17,5 +19,6 @@ async def play(robot):
     print('Battery: ', battery[0], 'mV; ', battery[1], '%')
     print('Serial #:', await robot.get_serial_number())
     print('SKU:', await robot.get_sku())
+    sleep(5)
 
 robot.play()
