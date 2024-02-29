@@ -3,8 +3,8 @@ from irobot_edu_sdk.robots import event, hand_over, Color, Robot, Root, Create3
 from irobot_edu_sdk.music import Note
 
 robot = Root(Bluetooth())
-#robot = Create3(Bluetooth())
-robot=Create3(Bluetooth('MonicaRoomba'))
+robot = Create3(Bluetooth())
+#robot=Create3(Bluetooth('MonicaRoomba'))
 
 
 @event(robot.when_play)
