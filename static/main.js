@@ -3,27 +3,52 @@ var server='10.66.66.2:8080';
 
 document.addEventListener('keydown', function(event) {
     const arrowDisplay = document.getElementById('arrowDisplay');
+    let message = null; // This will be the message sent through Socket.IO
     
     switch(event.key) {
         case "ArrowUp":
             arrowDisplay.textContent = '↑ Up';
+            message = '↑';
             break;
         case "ArrowDown":
             arrowDisplay.textContent = '↓ Down';
+            message = '↓';
             break;
         case "ArrowLeft":
             arrowDisplay.textContent = '← Left';
+            message = '←';
             break;
         case "ArrowRight":
             arrowDisplay.textContent = '→ Right';
+            message = '→';
             break;
         default:
             // If any other key is pressed, do nothing
             return;
     }
+
+    // Emit the message if an arrow key was pressed
+    if (message) {
+        socket.emit('message', message);
+    }
     
     event.preventDefault(); // Prevent the default action to avoid scrolling with arrow keys
 });
+
+// Add a 'keyup' event listener to reset the display text
+document.addEventListener('keyup', function(event) {
+    // Check if the released key is one of the arrow keys
+    if(event.key === "ArrowUp" || event.key === "ArrowDown" || event.key === "ArrowLeft" || event.key === "ArrowRight") {
+        const arrowDisplay = document.getElementById('arrowDisplay');
+        arrowDisplay.textContent = 'Press an arrow key...';
+
+        // Emit the message if an arrow key was pressed
+  
+        socket.emit('message', "");
+   
+    }
+});
+
 
 function httpGetAsync(theUrl, callback) {
     try {

@@ -2,7 +2,10 @@
 A web remote controller with video stream for a roomba with a camera on it
 
 ## Instructions
-execute sudo modprobe bcm2835-v4l2
+execute 
+```
+sudo modprobe bcm2835-v4l2
+```
 run runserver.sh on a raspberry pi (tested on raspi 3b)
 create a linux service to run this script on boot
 

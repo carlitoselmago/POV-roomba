@@ -13,6 +13,7 @@ def index():
 @socketio.on('message')
 def handle_message(message):
     # Just emit the received message to all connected clients except the sender
+    print("message",message)
     emit('message', message, broadcast=True, include_self=False)
 
 # WebSocket events for signaling would go here
