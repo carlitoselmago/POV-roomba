@@ -23,7 +23,7 @@ class roombacontrol():
         self.robot.play()
 
     
-    async def getcommand(self, command):
+    async def docommand(self, command):
         if command=="":
             self.left=0
             self.right=0
