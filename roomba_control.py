@@ -20,7 +20,7 @@ class roombacontrol():
 
                 await self.robot.set_wheel_speeds(self.left,self.right )
         
-        self.robot.play()
+        #self.robot.play()
 
     
     async def docommand(self, command):
