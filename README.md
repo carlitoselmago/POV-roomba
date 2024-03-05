@@ -2,6 +2,12 @@
 A web remote controller with video stream for a roomba with a camera on it
 
 ## Instructions
+install from source bluez 5.66
+first run:
+sudo apt-get update
+sudo apt-get install libdbus-1-dev libudev-dev libical-dev libreadline-dev libglib2.0-dev libdbus-glib-1-dev libusb-dev systemd libsystemd-dev
+https://learn.adafruit.com/install-bluez-on-the-raspberry-pi/installation
+
 execute 
 ```
 sudo modprobe bcm2835-v4l2
