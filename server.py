@@ -21,7 +21,7 @@ def connected(message):
 @socketio.on('message')
 def handle_message(message):
     # Just emit the received message to all connected clients except the sender
-    print("message",message)
+    print("got message",message)
     roomba.docommand(message)
     emit('message', message, broadcast=True, include_self=False)
     

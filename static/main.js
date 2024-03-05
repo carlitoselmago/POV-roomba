@@ -27,6 +27,7 @@ document.addEventListener('keydown', function(event) {
             break;
         default:
             // If any other key is pressed, do nothing
+            message = '';
             return;
     }
 
