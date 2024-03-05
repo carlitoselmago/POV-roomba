@@ -1,6 +1,9 @@
 var server='10.66.66.2:8080';
 
-
+var socket = io();
+    socket.on('connect', function() {
+        socket.emit('connected', {data: 'I\'m connected!'});
+    });
 document.addEventListener('keydown', function(event) {
     const arrowDisplay = document.getElementById('arrowDisplay');
     let message = null; // This will be the message sent through Socket.IO

@@ -14,6 +14,10 @@ roomba=roombacontrol()
 def index():
     return render_template('uv4l.html')
 
+@socketio.on('connect')
+def connected(message):
+    print("connect",message)
+
 @socketio.on('message')
 def handle_message(message):
     # Just emit the received message to all connected clients except the sender
