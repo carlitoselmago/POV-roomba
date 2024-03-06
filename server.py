@@ -16,7 +16,7 @@ CORS(app)
 app.config['SECRET_KEY'] = 'secret!'
 socketio = SocketIO(app,cors_allowed_origins="*")
 
-q = Queue()  # Create a queue
+q = Queue(maxsize=5)  # Create a queue
 
 @app.route('/')
 def index():
