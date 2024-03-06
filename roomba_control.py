@@ -11,6 +11,9 @@ class roombacontrol():
     moving=True
 
     def __init__(self):
+        pass
+
+    def startroomba(self):
         robot = Create3(Bluetooth('MonicaRoomba'))
 
         @event(robot.when_play)
@@ -21,7 +24,6 @@ class roombacontrol():
                 await robot.set_wheel_speeds(self.left,self.right )
         
         robot.play()
-
     
     async def docommand(self, command):
         if command=="":
