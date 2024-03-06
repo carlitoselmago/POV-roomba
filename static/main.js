@@ -1,10 +1,10 @@
 var server='10.66.66.2:8080';
-/*
+
 var socket = io();
     socket.on('connect', function() {
         socket.emit('connected', {data: 'I\'m connected!'});
     });
-    */
+    
 document.addEventListener('keydown', function(event) {
     const arrowDisplay = document.getElementById('arrowDisplay');
     let message = null; // This will be the message sent through Socket.IO
@@ -249,7 +249,7 @@ function start() {
         document.getElementById("start").disabled = true;
         document.documentElement.style.cursor = 'wait';
         //var server = document.getElementById("signalling_server").value.toLowerCase();
-        console.log("server");
+        console.log("server",server);
         var protocol = location.protocol === "https:" ? "wss:" : "ws:";
         ws = new WebSocket(protocol + '//' + server + '/stream/webrtc');
 
