@@ -1,6 +1,49 @@
 from irobot_edu_sdk.robots import event, hand_over, Color, Robot, Root, Create3
 from irobot_edu_sdk.backend.bluetooth import Bluetooth
 
+
+left=0
+right=0
+
+speed=5
+
+def startroomba(q):
+    robot = Create3(Bluetooth('MonicaRoomba'))
+
+    @event(robot.when_play)
+    async def play(robot):
+
+        while True:
+            command = q.get()
+            if command:
+                if command=="":
+                    left=0
+                    right=0
+
+                if command=="←":
+                    left=-speed
+                    right=speed
+
+                if command=="→":
+                    left=speed
+                    right=-speed
+
+                if command=="↑":
+                    left=speed
+                    right=speed
+
+
+                if command=="↓":
+                    left=-speed
+                    right=-speed
+
+            await robot.set_wheel_speeds(left,right )
+    
+    robot.play()
+    
+
+
+"""
 class roombacontrol():
 
     left=0
@@ -48,3 +91,4 @@ class roombacontrol():
             self.right=-self.speed
 
         #await self.robot.set_wheel_speeds(self.left,self.right )
+"""
