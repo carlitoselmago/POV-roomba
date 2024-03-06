@@ -1,6 +1,6 @@
 var server='10.66.66.2:8080';
 
-var socket = io("http://localhost:5000");
+var socket = io("localhost:5000");
     socket.on('connect', function() {
         socket.emit('connected', {data: 'I\'m connected!'});
     });
