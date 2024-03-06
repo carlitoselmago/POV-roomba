@@ -5,6 +5,9 @@ from roomba_control import roombacontrol
 from flask_cors import CORS
 import threading
 
+from irobot_edu_sdk.robots import event, hand_over, Color, Robot, Root, Create3
+from irobot_edu_sdk.backend.bluetooth import Bluetooth
+
 app = Flask(__name__)
 CORS(app)
 app.config['SECRET_KEY'] = 'secret!'
