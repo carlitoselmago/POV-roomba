@@ -10,8 +10,20 @@ CORS(app)
 app.config['SECRET_KEY'] = 'secret!'
 socketio = SocketIO(app,cors_allowed_origins="*")
 
-roomba=roombacontrol()
-roombathread = threading.Thread(target=roomba.startroomba)
+def startroomba():
+    robot = Create3(Bluetooth('MonicaRoomba'))
+
+    @event(robot.when_play)
+    async def play(robot):
+
+        while self.moving:
+
+            await robot.set_wheel_speeds(self.left,self.right )
+    
+    robot.play()
+
+#roomba=roombacontrol()
+roombathread = threading.Thread(target=startroomba)
 roombathread.start()
 
 
@@ -28,7 +40,7 @@ def connected(message):
 def handle_message(message):
     # Just emit the received message to all connected clients except the sender
     print("got message",message)
-    roomba.docommand(message)
+    #roomba.docommand(message)
     emit('message', message, broadcast=True, include_self=False)
     
 
