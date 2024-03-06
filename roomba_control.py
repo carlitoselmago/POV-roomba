@@ -13,7 +13,7 @@ def startroomba(q):
             try:
                 command = q.get(True,1)
                 print("got command",command)
-            except q.Empty:
+            except:
                 command=""
             left=0
             right=0
