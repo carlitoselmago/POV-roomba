@@ -48,3 +48,4 @@ if __name__ == '__main__':
     p = Process(target=startroomba, args=(q,))  # Set up the child process with the queue
     p.start()  # Start the child process
     socketio.run(app, debug=True,host='0.0.0.0', port=5000)
+    p.join()

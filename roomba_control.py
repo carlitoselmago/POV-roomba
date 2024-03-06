@@ -12,7 +12,7 @@ def startroomba(q):
 
     @event(robot.when_play)
     async def play(robot):
-
+        print("ROBOT PLAY")
         while True:
             command = q.get()
             if command:
