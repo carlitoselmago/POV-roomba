@@ -11,7 +11,7 @@ from irobot_edu_sdk.backend.bluetooth import Bluetooth
 app = Flask(__name__)
 CORS(app)
 app.config['SECRET_KEY'] = 'secret!'
-socketio = SocketIO(app,cors_allowed_origins="*")
+socketio = SocketIO(app,cors_allowed_origins="*",async_mode='threading')
 
 
 robot = Create3(Bluetooth('MonicaRoomba'))
@@ -50,5 +50,5 @@ def handle_message(message):
 # WebSocket events for signaling would go here
 
 if __name__ == '__main__':
-    socketio.run(app, debug=True,host='0.0.0.0', port=5000,threaded=True)
+    socketio.run(app, debug=True,host='0.0.0.0', port=5000)
     robot.play()
