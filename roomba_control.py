@@ -8,7 +8,7 @@ def startroomba(q):
 
     @event(robot.when_play)
     async def play(robot):
-        global q
+        
         print("ROBOT PLAY")
         while True:
             try:
