@@ -19,7 +19,7 @@ def startroomba():
     @event(robot.when_play)
     async def play(robot):
 
-        while self.moving:
+        while True:
 
             await robot.set_wheel_speeds(self.left,self.right )
     
