@@ -16,6 +16,7 @@ def startroomba(q):
         while True:
             command = q.get()
             if command:
+                print("got command",command)
                 if command=="":
                     left=0
                     right=0

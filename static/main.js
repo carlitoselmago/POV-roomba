@@ -176,7 +176,7 @@ function onDataChannel(event) {
 
     event.channel.onopen = function () {
         console.log("Data Channel is open!");
-        document.getElementById('datachannels').disabled = false;
+        //document.getElementById('datachannels').disabled = false;
     };
 
     event.channel.onerror = function (error) {
