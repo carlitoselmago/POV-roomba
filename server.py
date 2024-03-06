@@ -12,7 +12,6 @@ socketio = SocketIO(app,cors_allowed_origins="*")
 
 roomba=roombacontrol()
 roombathread = threading.Thread(target=roomba.startroomba)
-
 roombathread.start()
 
 
