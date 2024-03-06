@@ -44,7 +44,7 @@ def startroomba(q):
 
             await robot.set_wheel_speeds(left,right )
     
-    robot.play(q)
+    robot.play()
     
 
 
