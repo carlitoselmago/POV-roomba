@@ -50,5 +50,5 @@ def handle_message(message):
 # WebSocket events for signaling would go here
 
 if __name__ == '__main__':
-    socketio.run(app, debug=True,host='0.0.0.0', port=5000)
+    socketio.run(app, debug=True,host='0.0.0.0', port=5000,threaded=True)
     robot.play()
