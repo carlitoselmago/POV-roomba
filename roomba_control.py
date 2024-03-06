@@ -13,7 +13,7 @@ class roombacontrol():
     def __init__(self):
         robot = Create3(Bluetooth('MonicaRoomba'))
 
-        @event(self.robot.when_play)
+        @event(robot.when_play)
         async def move():
 
             while self.moving:
