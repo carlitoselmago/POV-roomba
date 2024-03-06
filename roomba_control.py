@@ -7,7 +7,8 @@ def startroomba(q):
     robot = Create3(Bluetooth('MonicaRoomba'))
 
     @event(robot.when_play)
-    async def play(robot,q):
+    async def play(robot):
+        global q
         print("ROBOT PLAY")
         while True:
             try:
