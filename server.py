@@ -16,7 +16,7 @@ CORS(app)
 app.config['SECRET_KEY'] = 'secret!'
 socketio = SocketIO(app,cors_allowed_origins="*")
 
-q = Queue(maxsize=10)  # Create a queue
+
 
 @app.route('/')
 def index():
@@ -39,8 +39,8 @@ def handle_message(message):
 # WebSocket events for signaling would go here
 
 if __name__ == '__main__':
-    
+    q = Queue(maxsize=10)  # Create a queue
     p = Process(target=startroomba, args=(q,))  # Set up the child process with the queue
     p.start()  # Start the child process
     socketio.run(app, debug=True,host='0.0.0.0', port=5000)
-    p.join()
+    #p.join()
