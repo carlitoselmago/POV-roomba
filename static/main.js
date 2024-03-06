@@ -1,59 +1,61 @@
-var server='10.66.66.2:8080';
+var server = '10.66.66.2:8080';
 
-var socket = io("localhost:5000");
-    socket.on('connect', function() {
-        socket.emit('connected', {data: 'I\'m connected!'});
+document.addEventListener('DOMContentLoaded', (event) => {
+    var socket = io.connect('http://localhost:5000');
+
+    socket.on('connect', function () {
+        socket.emit('connected', { data: 'I\'m connected!' });
     });
-    
-document.addEventListener('keydown', function(event) {
-    const arrowDisplay = document.getElementById('arrowDisplay');
-    let message = null; // This will be the message sent through Socket.IO
-    
-    switch(event.key) {
-        case "ArrowUp":
-            arrowDisplay.textContent = '↑ Up';
-            message = '↑';
-            break;
-        case "ArrowDown":
-            arrowDisplay.textContent = '↓ Down';
-            message = '↓';
-            break;
-        case "ArrowLeft":
-            arrowDisplay.textContent = '← Left';
-            message = '←';
-            break;
-        case "ArrowRight":
-            arrowDisplay.textContent = '→ Right';
-            message = '→';
-            break;
-        default:
-            // If any other key is pressed, do nothing
-            message = '';
-            return;
-    }
 
-    // Emit the message if an arrow key was pressed
-    if (message) {
-        socket.emit('message', message);
-    }
-    
-    event.preventDefault(); // Prevent the default action to avoid scrolling with arrow keys
-});
-
-// Add a 'keyup' event listener to reset the display text
-document.addEventListener('keyup', function(event) {
-    // Check if the released key is one of the arrow keys
-    if(event.key === "ArrowUp" || event.key === "ArrowDown" || event.key === "ArrowLeft" || event.key === "ArrowRight") {
+    document.addEventListener('keydown', function (event) {
         const arrowDisplay = document.getElementById('arrowDisplay');
-        arrowDisplay.textContent = 'Press an arrow key...';
+        let message = null; // This will be the message sent through Socket.IO
+
+        switch (event.key) {
+            case "ArrowUp":
+                arrowDisplay.textContent = '↑ Up';
+                message = '↑';
+                break;
+            case "ArrowDown":
+                arrowDisplay.textContent = '↓ Down';
+                message = '↓';
+                break;
+            case "ArrowLeft":
+                arrowDisplay.textContent = '← Left';
+                message = '←';
+                break;
+            case "ArrowRight":
+                arrowDisplay.textContent = '→ Right';
+                message = '→';
+                break;
+            default:
+                // If any other key is pressed, do nothing
+                message = '';
+                return;
+        }
 
         // Emit the message if an arrow key was pressed
-  
-        socket.emit('message', "");
-   
-    }
-});
+        if (message) {
+            socket.emit('message', message);
+        }
 
+        event.preventDefault(); // Prevent the default action to avoid scrolling with arrow keys
+    });
+
+    // Add a 'keyup' event listener to reset the display text
+    document.addEventListener('keyup', function (event) {
+        // Check if the released key is one of the arrow keys
+        if (event.key === "ArrowUp" || event.key === "ArrowDown" || event.key === "ArrowLeft" || event.key === "ArrowRight") {
+            const arrowDisplay = document.getElementById('arrowDisplay');
+            arrowDisplay.textContent = 'Press an arrow key...';
+
+            // Emit the message if an arrow key was pressed
+
+            socket.emit('message', "");
+
+        }
+    });
+});
 
 function httpGetAsync(theUrl, callback) {
     try {
@@ -84,7 +86,7 @@ var signalling_server_address = signalling_server_hostname + ':' + (location.por
 var isFirefox = typeof InstallTrigger !== 'undefined';// Firefox 1.0+
 
 addEventListener("DOMContentLoaded", function () {
-   // document.getElementById('signalling_server').value = signalling_server_address;
+    // document.getElementById('signalling_server').value = signalling_server_address;
     var cast_not_allowed = !('MediaSource' in window) || location.protocol !== "https:";
     if (cast_not_allowed || !isFirefox) {
         if (document.getElementById('cast_tab'))
@@ -100,7 +102,7 @@ addEventListener("DOMContentLoaded", function () {
         //ddocument.getElementById('note1').style.display = "none";
         //ddocument.getElementById('note3').style.display = "none";
     }
-   // addGyronormScript();
+    // addGyronormScript();
 });
 
 var ws = null;
@@ -111,8 +113,9 @@ var audio_video_stream;
 var recorder = null;
 var recordedBlobs;
 var pcConfig = {/*sdpSemantics : "plan-b"*,*/ "iceServers": [
-        {"urls": ["stun:stun.l.google.com:19302", "stun:" + signalling_server_hostname + ":3478"]}
-    ]};
+    { "urls": ["stun:stun.l.google.com:19302", "stun:" + signalling_server_hostname + ":3478"] }
+]
+};
 var pcOptions = {
     optional: [
         // Deprecated:
@@ -148,8 +151,8 @@ function createPeerConnection() {
             }
         } catch (e) {
             alert(e + "\nExample: "
-                    + '\n[ {"urls": "stun:stun1.example.net"}, {"urls": "turn:turn.example.org", "username": "user", "credential": "myPassword"} ]'
-                    + "\nContinuing with built-in RTCIceServer array");
+                + '\n[ {"urls": "stun:stun1.example.net"}, {"urls": "turn:turn.example.org", "username": "user", "credential": "myPassword"} ]'
+                + "\nContinuing with built-in RTCIceServer array");
         }
         console.log(JSON.stringify(pcConfig_));
         pc = new RTCPeerConnection(pcConfig_, pcOptions);
@@ -249,7 +252,7 @@ function start() {
         document.getElementById("start").disabled = true;
         document.documentElement.style.cursor = 'wait';
         //var server = document.getElementById("signalling_server").value.toLowerCase();
-        console.log("server",server);
+        console.log("server", server);
         var protocol = location.protocol === "https:" ? "wss:" : "ws:";
         ws = new WebSocket(protocol + '//' + server + '/stream/webrtc');
 
@@ -277,20 +280,20 @@ function start() {
 
             audio_video_stream = null;
             var cast_mic = false;//document.getElementById("cast_mic").checked;
-            var cast_tab =  false;//document.getElementById("cast_tab") ? document.getElementById("cast_tab").checked : false;
+            var cast_tab = false;//document.getElementById("cast_tab") ? document.getElementById("cast_tab").checked : false;
             var cast_camera = false;//document.getElementById("cast_camera").checked;
-            var cast_screen =  false;//document.getElementById("cast_screen").checked;
-            var cast_window =  false;//document.getElementById("cast_window").checked;
-            var cast_application =  false;//document.getElementById("cast_application").checked;
-            var echo_cancellation =  false;//document.getElementById("echo_cancellation").checked;
+            var cast_screen = false;//document.getElementById("cast_screen").checked;
+            var cast_window = false;//document.getElementById("cast_window").checked;
+            var cast_application = false;//document.getElementById("cast_application").checked;
+            var echo_cancellation = false;//document.getElementById("echo_cancellation").checked;
             var localConstraints = {};
             if (cast_mic) {
                 if (echo_cancellation)
-                    localConstraints['audio'] = isFirefox ? {echoCancellation: true} : {optional: [{echoCancellation: true}]};
+                    localConstraints['audio'] = isFirefox ? { echoCancellation: true } : { optional: [{ echoCancellation: true }] };
                 else
-                    localConstraints['audio'] = isFirefox ? {echoCancellation: false} : {optional: [{echoCancellation: false}]};
+                    localConstraints['audio'] = isFirefox ? { echoCancellation: false } : { optional: [{ echoCancellation: false }] };
             } else if (cast_tab) {
-                localConstraints['audio'] = {mediaSource: "audioCapture"};
+                localConstraints['audio'] = { mediaSource: "audioCapture" };
             } else {
                 localConstraints['audio'] = false;
             }
@@ -298,29 +301,35 @@ function start() {
                 localConstraints['video'] = true;
             } else if (cast_screen) {
                 if (isFirefox) {
-                    localConstraints['video'] = {frameRate: {ideal: 30, max: 30},
+                    localConstraints['video'] = {
+                        frameRate: { ideal: 30, max: 30 },
                         //width: {min: 640, max: 960},
                         //height: {min: 480, max: 720},
                         mozMediaSource: "screen",
-                        mediaSource: "screen"};
+                        mediaSource: "screen"
+                    };
                 } else {
                     // chrome://flags#enable-usermedia-screen-capturing
                     document.getElementById("cast_mic").checked = false;
                     localConstraints['audio'] = false; // mandatory for chrome
-                    localConstraints['video'] = {'mandatory': {'chromeMediaSource':'screen'}};
+                    localConstraints['video'] = { 'mandatory': { 'chromeMediaSource': 'screen' } };
                 }
             } else if (cast_window)
-                localConstraints['video'] = {frameRate: {ideal: 30, max: 30},
+                localConstraints['video'] = {
+                    frameRate: { ideal: 30, max: 30 },
                     //width: {min: 640, max: 960},
                     //height: {min: 480, max: 720},
                     mozMediaSource: "window",
-                    mediaSource: "window"};
+                    mediaSource: "window"
+                };
             else if (cast_application)
-                localConstraints['video'] = {frameRate: {ideal: 30, max: 30},
+                localConstraints['video'] = {
+                    frameRate: { ideal: 30, max: 30 },
                     //width: {min: 640, max: 960},
                     //height:  {min: 480, max: 720},
                     mozMediaSource: "application",
-                    mediaSource: "application"};
+                    mediaSource: "application"
+                };
             else
                 localConstraints['video'] = false;
 
@@ -358,28 +367,28 @@ function start() {
             switch (what) {
                 case "offer":
                     pc.setRemoteDescription(new RTCSessionDescription(JSON.parse(data)),
-                            function onRemoteSdpSuccess() {
-                                remoteDesc = true;
-                                addIceCandidates();
-                                console.log('onRemoteSdpSucces()');
-                                pc.createAnswer(function (sessionDescription) {
-                                    pc.setLocalDescription(sessionDescription);
-                                    var request = {
-                                        what: "answer",
-                                        data: JSON.stringify(sessionDescription)
-                                    };
-                                    ws.send(JSON.stringify(request));
-                                    console.log(request);
+                        function onRemoteSdpSuccess() {
+                            remoteDesc = true;
+                            addIceCandidates();
+                            console.log('onRemoteSdpSucces()');
+                            pc.createAnswer(function (sessionDescription) {
+                                pc.setLocalDescription(sessionDescription);
+                                var request = {
+                                    what: "answer",
+                                    data: JSON.stringify(sessionDescription)
+                                };
+                                ws.send(JSON.stringify(request));
+                                console.log(request);
 
-                                }, function (error) {
-                                    alert("Failed to createAnswer: " + error);
+                            }, function (error) {
+                                alert("Failed to createAnswer: " + error);
 
-                                }, mediaConstraints);
-                            },
-                            function onRemoteSdpError(event) {
-                                alert('Failed to set remote description (unsupported codec on this browser?): ' + event);
-                                stop();
-                            }
+                            }, mediaConstraints);
+                        },
+                        function onRemoteSdpError(event) {
+                            alert('Failed to set remote description (unsupported codec on this browser?): ' + event);
+                            stop();
+                        }
                     );
 
                     /*
@@ -405,7 +414,7 @@ function start() {
                         break;
                     }
                     var elt = JSON.parse(msg.data);
-                    let candidate = new RTCIceCandidate({sdpMLineIndex: elt.sdpMLineIndex, candidate: elt.candidate});
+                    let candidate = new RTCIceCandidate({ sdpMLineIndex: elt.sdpMLineIndex, candidate: elt.candidate });
                     iceCandidates.push(candidate);
                     if (remoteDesc)
                         addIceCandidates();
@@ -416,7 +425,7 @@ function start() {
                     var candidates = JSON.parse(msg.data);
                     for (var i = 0; candidates && i < candidates.length; i++) {
                         var elt = candidates[i];
-                        let candidate = new RTCIceCandidate({sdpMLineIndex: elt.sdpMLineIndex, candidate: elt.candidate});
+                        let candidate = new RTCIceCandidate({ sdpMLineIndex: elt.sdpMLineIndex, candidate: elt.candidate });
                         iceCandidates.push(candidate);
                     }
                     if (remoteDesc)
@@ -524,7 +533,7 @@ function handleStop(event) {
     console.log('Recorder stopped: ', event);
     document.getElementById('record').innerHTML = 'Start Recording';
     recorder = null;
-    var superBuffer = new Blob(recordedBlobs, {type: 'video/webm'});
+    var superBuffer = new Blob(recordedBlobs, { type: 'video/webm' });
     var recordedVideoElement = document.getElementById('recorded-video');
     recordedVideoElement.src = URL.createObjectURL(superBuffer);
 }
@@ -545,19 +554,19 @@ function stop_record() {
 
 function startRecording(stream) {
     recordedBlobs = [];
-    var options = {mimeType: 'video/webm;codecs=vp9'};
+    var options = { mimeType: 'video/webm;codecs=vp9' };
     if (!MediaRecorder.isTypeSupported(options.mimeType)) {
         console.log(options.mimeType + ' is not Supported');
-        options = {mimeType: 'video/webm;codecs=vp8'};
+        options = { mimeType: 'video/webm;codecs=vp8' };
         if (!MediaRecorder.isTypeSupported(options.mimeType)) {
             console.log(options.mimeType + ' is not Supported');
-            options = {mimeType: 'video/webm;codecs=h264'};
+            options = { mimeType: 'video/webm;codecs=h264' };
             if (!MediaRecorder.isTypeSupported(options.mimeType)) {
                 console.log(options.mimeType + ' is not Supported');
-                options = {mimeType: 'video/webm'};
+                options = { mimeType: 'video/webm' };
                 if (!MediaRecorder.isTypeSupported(options.mimeType)) {
                     console.log(options.mimeType + ' is not Supported');
-                    options = {mimeType: ''};
+                    options = { mimeType: '' };
                 }
             }
         }
@@ -595,7 +604,7 @@ function start_stop_record() {
 
 function download() {
     if (recordedBlobs !== undefined) {
-        var blob = new Blob(recordedBlobs, {type: 'video/webm'});
+        var blob = new Blob(recordedBlobs, { type: 'video/webm' });
         var url = window.URL.createObjectURL(blob);
         var a = document.createElement('a');
         a.style.display = 'none';
@@ -758,7 +767,7 @@ function create_localdatachannel() {
     if (pc && localdatachannel)
         return;
     localdatachannel = pc.createDataChannel('datachannel');
-    localdatachannel.onopen = function(event) {
+    localdatachannel.onopen = function (event) {
         if (localdatachannel.readyState === "open") {
             localdatachannel.send("datachannel created!");
         }
@@ -790,7 +799,7 @@ function handleOrientation(event) {
 function isGyronormPresent() {
     var url = "gyronorm.complete.min.js";
     var scripts = document.getElementsByTagName('script');
-    for (var i = scripts.length; i--; ) {
+    for (var i = scripts.length; i--;) {
         if (scripts[i].src.indexOf(url) > -1)
             return true;
     }
@@ -1122,7 +1131,7 @@ window.onload = function () {
 
 window.onbeforeunload = function () {
     if (ws) {
-        ws.onclose = function () {}; // disable onclose handler first
+        ws.onclose = function () { }; // disable onclose handler first
         stop();
     }
 };
