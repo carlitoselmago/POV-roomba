@@ -18,7 +18,7 @@ class roombacontrol():
 
             while self.moving:
 
-                await self.robot.set_wheel_speeds(self.left,self.right )
+                await robot.set_wheel_speeds(self.left,self.right )
         
         robot.play()
 
