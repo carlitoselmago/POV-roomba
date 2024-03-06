@@ -11,7 +11,7 @@ class roombacontrol():
     moving=False
 
     def __init__(self):
-        self.robot = Create3(Bluetooth('MonicaRoomba'))
+        robot = Create3(Bluetooth('MonicaRoomba'))
 
         @event(self.robot.when_play)
         async def move():
@@ -20,7 +20,7 @@ class roombacontrol():
 
                 await self.robot.set_wheel_speeds(self.left,self.right )
         
-        self.robot.play()
+        robot.play()
 
     
     async def docommand(self, command):
@@ -45,4 +45,4 @@ class roombacontrol():
             self.left=-self.speed
             self.right=-self.speed
 
-        await self.robot.set_wheel_speeds(self.left,self.right )
+        #await self.robot.set_wheel_speeds(self.left,self.right )
