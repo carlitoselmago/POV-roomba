@@ -7,7 +7,7 @@ def startroomba(q):
     robot = Create3(Bluetooth('MonicaRoomba'))
 
     @event(robot.when_play)
-    async def play(robot):
+    async def play(robot,q):
         print("ROBOT PLAY")
         while True:
             try:
@@ -44,7 +44,7 @@ def startroomba(q):
 
             await robot.set_wheel_speeds(left,right )
     
-    robot.play()
+    robot.play(q)
     
 
 
