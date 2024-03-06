@@ -11,7 +11,7 @@ from irobot_edu_sdk.backend.bluetooth import Bluetooth
 app = Flask(__name__)
 CORS(app)
 app.config['SECRET_KEY'] = 'secret!'
-socketio = SocketIO(app,cors_allowed_origins="*",async_mode='threading')
+socketio = SocketIO(app,cors_allowed_origins="*")
 
 
 robot = Create3(Bluetooth('MonicaRoomba'))
