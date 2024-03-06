@@ -16,12 +16,15 @@ socketio = SocketIO(app,cors_allowed_origins="*",async_mode='threading')
 
 robot = Create3(Bluetooth('MonicaRoomba'))
 
+left=0
+right=0
+
 @event(robot.when_play)
 async def play(robot):
 
     while True:
 
-        await robot.set_wheel_speeds(self.left,self.right )
+        await robot.set_wheel_speeds(left,right )
 
 
 
