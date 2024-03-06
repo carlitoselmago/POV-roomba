@@ -1,7 +1,7 @@
 var server = '10.66.66.2:8080';
 
 document.addEventListener('DOMContentLoaded', (event) => {
-    var socket = io.connect('http://localhost:5000');
+    var socket = io.connect('http://0.0.0.0:5000');
 
     socket.on('connect', function () {
         socket.emit('connected', { data: 'I\'m connected!' });
