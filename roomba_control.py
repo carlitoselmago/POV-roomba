@@ -13,8 +13,8 @@ def startroomba(q):
             try:
                 command = q.get(timeout=2)
                 print("got command",command)
-            except:
-                print("could not get queue")
+            except Exception as e:
+                print("could not get queue",e)
                 command=""
             left=0
             right=0
