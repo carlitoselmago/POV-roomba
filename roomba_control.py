@@ -10,7 +10,8 @@ def startroomba(q):
     async def play(robot):
         print("ROBOT PLAY")
         while True:
-            command = q.get(block=False)
+            #command = q.get()
+            command=""
             print("got command",command)
 
             left=0
