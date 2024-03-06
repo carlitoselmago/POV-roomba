@@ -13,21 +13,21 @@ CORS(app)
 app.config['SECRET_KEY'] = 'secret!'
 socketio = SocketIO(app,cors_allowed_origins="*")
 
-def startroomba():
-    robot = Create3(Bluetooth('MonicaRoomba'))
 
-    @event(robot.when_play)
-    async def play(robot):
+robot = Create3(Bluetooth('MonicaRoomba'))
 
-        while True:
+@event(robot.when_play)
+async def play(robot):
 
-            await robot.set_wheel_speeds(self.left,self.right )
-    
-    robot.play()
+    while True:
+
+        await robot.set_wheel_speeds(self.left,self.right )
+
+
 
 #roomba=roombacontrol()
-roombathread = threading.Thread(target=startroomba)
-roombathread.start()
+#roombathread = threading.Thread(target=startroomba)
+#roombathread.start()
 
 
 
@@ -51,3 +51,4 @@ def handle_message(message):
 
 if __name__ == '__main__':
     socketio.run(app, debug=True,host='0.0.0.0', port=5000)
+    robot.play()
