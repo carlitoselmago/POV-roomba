@@ -11,7 +11,7 @@ def startroomba(q):
         print("ROBOT PLAY")
         while True:
             try:
-                command = q.get()
+                command = q.get(timeout=2)
                 print("got command",command)
             except:
                 print("could not get queue")
