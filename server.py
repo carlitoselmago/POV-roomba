@@ -2,10 +2,12 @@
 from flask import Flask, render_template
 from flask_socketio import SocketIO,emit
 from roomba_control import roombacontrol
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
 app.config['SECRET_KEY'] = 'secret!'
-socketio = SocketIO(app)
+socketio = SocketIO(app,cors_allowed_origins="*")
 
 roomba=roombacontrol()
 
