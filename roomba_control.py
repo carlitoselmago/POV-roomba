@@ -10,10 +10,11 @@ def startroomba(q):
     async def play(robot):
         print("ROBOT PLAY")
         while True:
-            #command = q.get()
-            command=""
-            print("got command",command)
-
+            try:
+                command = q.get(True,1)
+                print("got command",command)
+            except q.Empty:
+                command=""
             left=0
             right=0
 
