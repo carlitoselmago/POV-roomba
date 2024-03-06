@@ -18,12 +18,6 @@ socketio = SocketIO(app,cors_allowed_origins="*")
 
 q = Queue()  # Create a queue
 
-#roomba=roombacontrol()
-#roombathread = threading.Thread(target=startroomba)
-#roombathread.start()
-
-
-
 @app.route('/')
 def index():
     return render_template('uv4l.html')

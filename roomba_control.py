@@ -15,8 +15,9 @@ def startroomba(q):
         print("ROBOT PLAY")
         while True:
             command = q.get()
+            print("got command",command)
             if command:
-                print("got command",command)
+                
                 if command=="":
                     left=0
                     right=0
