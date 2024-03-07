@@ -5,15 +5,16 @@ from flask_socketio import SocketIO,emit
 from roomba_control import *
 from flask_cors import CORS
 import threading
-from multiprocessing import Process, Queue
+from multiprocessing import Process
+import elara
 
 app = Flask(__name__)
 CORS(app)
 app.config['SECRET_KEY'] = 'secret!'
 socketio = SocketIO(app,cors_allowed_origins="*")
 
-q = Queue(maxsize=1)  # Create a queue
-direction=""
+db = elara.exe("roomba.db")
+db.set("direction", "")
 
 @app.route('/')
 def index():
@@ -30,7 +31,7 @@ def handle_message(message):
     # Just emit the received message to all connected clients except the sender
     print("got message",message)
     #roomba.docommand(message)
-    direction=message
+    db.set("direction", message)
     #q.put(message)
     #print(q)
     emit('message', message, broadcast=True, include_self=False)
@@ -38,14 +39,9 @@ def handle_message(message):
 
 # WebSocket events for signaling would go here
 
-def setdirectionLoop():
-    while True:
-        q.put(direction)
 
 
 if __name__ == '__main__':
-    x = threading.Thread(target=setdirectionLoop)
-    x.start()
     p = Process(target=startroomba, args=(q,))  # Set up the child process with the queue
     p.start()  # Start the child process
     socketio.run(app, debug=True,host='0.0.0.0', port=5000)
