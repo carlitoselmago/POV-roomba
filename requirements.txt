@@ -1,3 +1,4 @@
+irobot_edu_sdk
 flask
 flask-socketio
 flask-cors

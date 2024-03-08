@@ -1,10 +1,18 @@
 var server = '10.66.66.2:8080';
 
+function dock(){
+    socket.emit('message', 'dock');
+}
+
 document.addEventListener('DOMContentLoaded', (event) => {
     var socket = io.connect('http://10.66.66.2:5000');
 
     socket.on('connect', function () {
         socket.emit('connected', { data: 'I\'m connected!' });
+    });
+
+    socket.on('batterylevel', function (data) {
+       document.getElementById("batterynum").textContent=data;
     });
 
     document.addEventListener('keydown', function (event) {
@@ -13,11 +21,11 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
         switch (event.key) {
             case "ArrowUp":
-                arrowDisplay.textContent = '↑ Up';
+                arrowDisplay.textContent = '↑ Forward';
                 message = '↑';
                 break;
             case "ArrowDown":
-                arrowDisplay.textContent = '↓ Down';
+                arrowDisplay.textContent = '↓ Backward';
                 message = '↓';
                 break;
             case "ArrowLeft":
@@ -56,6 +64,9 @@ document.addEventListener('DOMContentLoaded', (event) => {
         }
     });
 });
+
+
+////////////////////////////////////////////////
 
 function httpGetAsync(theUrl, callback) {
     try {
@@ -481,10 +492,10 @@ function stop() {
         audio_video_stream = null;
     }
     stop_record();
-    document.getElementById('remote-video').srcObject = null;
-    document.getElementById('local-video').srcObject = null;
+    //document.getElementById('remote-video').srcObject = null;
+    //document.getElementById('local-video').srcObject = null;
     document.getElementById('remote-video').src = ''; // TODO; remove
-    document.getElementById('local-video').src = ''; // TODO: remove
+    //document.getElementById('local-video').src = ''; // TODO: remove
     if (pc) {
         pc.close();
         pc = null;
