@@ -6,7 +6,7 @@ from roomba_control import *
 from flask_cors import CORS
 import threading
 from multiprocessing import Process
-import elara
+import redis
 import time
 
 app = Flask(__name__)
@@ -14,7 +14,7 @@ CORS(app)
 app.config['SECRET_KEY'] = 'secret!'
 socketio = SocketIO(app,cors_allowed_origins="*")
 
-db = elara.exe("roomba.db")
+db = redis.Redis(host='localhost', port=6379, db=0)
 db.set("direction", "")
 db.set("battery", 100)
 
@@ -32,7 +32,7 @@ def handle_message(message):
     # Just emit the received message to all connected clients except the sender
     print("got message",message)
     db.set("command", message)
-    db.commit()
+   
     emit('message-response', message, broadcast=True, include_self=False)
     
 
