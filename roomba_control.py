@@ -37,7 +37,7 @@ def startroomba():
             left=0
             right=0
 
-            speed=8
+            speed=18
             turningspeed=5
             
             if command=="":
