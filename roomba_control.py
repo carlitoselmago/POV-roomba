@@ -20,7 +20,7 @@ def startroomba():
     db = elara.exe("roomba.db")
     robot = Create3(Bluetooth('MonicaRoomba'))
 
-    firstrun=True
+    
 
     #timed logics
     start_time = time.time()
@@ -28,7 +28,7 @@ def startroomba():
 
     @event(robot.when_play)
     async def play(robot):
-        
+        firstrun=True
         print("ROBOT PLAY")
         while True:
             command=db.get("command")
