@@ -7,7 +7,8 @@ start_time = time.time()
 duration=1*60
 
 def checktimer():
-   
+    global start_time
+    global duration
     if time.time() - start_time > duration:
         print("Timer reset!")
         start_time = time.time()  # Reset start time
