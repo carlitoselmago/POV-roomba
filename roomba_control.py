@@ -28,7 +28,7 @@ def startroomba():
 
     @event(robot.when_play)
     async def play(robot):
-        db = redis.Redis(host='localhost', port=6379, db=0)
+        db = redis.Redis(host='localhost', port=6379, db=0,decode_responses=True)
         firstrun=True
         print("ROBOT PLAY")
         while True:
