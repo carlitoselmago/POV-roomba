@@ -1,6 +1,6 @@
 from irobot_edu_sdk.robots import event, hand_over, Color, Robot, Root, Create3
 from irobot_edu_sdk.backend.bluetooth import Bluetooth
-import elara
+import redis
 import time
 
 start_time = time.time()
@@ -28,7 +28,7 @@ def startroomba():
 
     @event(robot.when_play)
     async def play(robot):
-        db = elara.exe("roomba.db")
+        db = redis.Redis(host='localhost', port=6379, decode_responses=True)
         firstrun=True
         print("ROBOT PLAY")
         while True:

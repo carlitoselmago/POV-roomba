@@ -32,6 +32,7 @@ def handle_message(message):
     # Just emit the received message to all connected clients except the sender
     print("got message",message)
     db.set("command", message)
+    db.commit()
     emit('message-response', message, broadcast=True, include_self=False)
     
 
