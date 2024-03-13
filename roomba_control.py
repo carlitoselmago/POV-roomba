@@ -32,7 +32,7 @@ def startroomba():
         print("ROBOT PLAY")
         while True:
             command=db.get("command")
-
+            print("command from roomba side",command)
             left=0
             right=0
 
