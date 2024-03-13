@@ -6,13 +6,8 @@ import time
 start_time = time.time()
 duration=1*60
 
-def starttimer():
-    global start_time
-    global duration
-
 def checktimer():
-    global start_time
-    global duration
+   
     if time.time() - start_time > duration:
         print("Timer reset!")
         start_time = time.time()  # Reset start time
@@ -20,7 +15,7 @@ def checktimer():
     return False
 
 def startroomba():
-    global start_time
+  
     db = elara.exe("roomba.db")
     robot = Create3(Bluetooth('MonicaRoomba'))
 
