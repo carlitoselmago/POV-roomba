@@ -45,8 +45,8 @@ if __name__ == '__main__':
     p.start()  # Start the child process
 
     #run updater
-    x = threading.Thread(target=updater, args=(db,))
-    x.start()
+    #x = threading.Thread(target=updater, args=(db,))
+    #x.start()
 
     socketio.run(app, debug=True,host='0.0.0.0', port=5000)
     p.join()
