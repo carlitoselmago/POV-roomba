@@ -3,6 +3,9 @@ from irobot_edu_sdk.backend.bluetooth import Bluetooth
 import elara
 import time
 
+start_time = time.time()
+duration=1*60
+
 def starttimer():
     global start_time
     global duration
@@ -17,6 +20,7 @@ def checktimer():
     return False
 
 def startroomba():
+    global start_time
     db = elara.exe("roomba.db")
     robot = Create3(Bluetooth('MonicaRoomba'))
 
