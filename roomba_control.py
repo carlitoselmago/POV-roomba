@@ -16,7 +16,7 @@ def checktimer():
         return True 
     return False
 
-def startroomba(q):
+def startroomba():
     db = elara.exe("roomba.db")
     robot = Create3(Bluetooth('MonicaRoomba'))
 
