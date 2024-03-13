@@ -1,11 +1,10 @@
 var server = '10.66.66.2:8080';
 
-function dock(){
-    socket.emit('message', 'dock');
-}
+var socket = io.connect('http://10.66.66.2:5000');
+
 
 document.addEventListener('DOMContentLoaded', (event) => {
-    var socket = io.connect('http://10.66.66.2:5000');
+   
 
     socket.on('connect', function () {
         socket.emit('connected', { data: 'I\'m connected!' });
@@ -65,6 +64,10 @@ document.addEventListener('DOMContentLoaded', (event) => {
     });
 });
 
+
+function dock(){
+    socket.emit('message', 'dock');
+}
 
 ////////////////////////////////////////////////
 
