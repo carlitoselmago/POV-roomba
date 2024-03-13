@@ -17,7 +17,7 @@ def checktimer():
 
 def startroomba():
   
-    db = elara.exe("roomba.db")
+    
     robot = Create3(Bluetooth('MonicaRoomba'))
 
     
@@ -28,6 +28,7 @@ def startroomba():
 
     @event(robot.when_play)
     async def play(robot):
+        db = elara.exe("roomba.db")
         firstrun=True
         print("ROBOT PLAY")
         while True:
